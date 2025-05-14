@@ -1,0 +1,21 @@
+﻿event_id,event_name,date,location,admin_id
+401,Soccer (Football),4/11/25,Patrick Gym,421
+402,Basketball,3/22/25,Maplewood Sports Complex,421
+403,Volleyball,3/22/25,Pine Hill Recreation Center,421
+404,Tennis,3/19/25,Patrick Gym,421
+405,Baseball,3/31/25,Lakeside Arena,421
+406,Softball,3/21/25,Maplewood Sports Complex,421
+407,Ultimate Frisbee,3/20/25,Riverside Athletic Park,421
+408,Flag Football,4/7/25,Iron Ridge Stadium,421
+409,Rugby,4/3/25,Summit Fieldhouse,421
+410,Cricket,3/20/25,Iron Ridge Stadium,421
+411,Hockey (Field or Ice),4/13/25,Iron Ridge Stadium,421
+412,Lacrosse,3/27/25,Pine Hill Recreation Center,422
+413,Badminton,4/5/25,Pine Hill Recreation Center,422
+414,Table Tennis (Ping Pong),4/12/25,Iron Ridge Stadium,422
+415,Pickleball,3/27/25,Patrick Gym,422
+416,Dodgeball,3/28/25,Patrick Gym,422
+417,Kickball,3/22/25,Summit Fieldhouse,422
+418,Handball,3/25/25,Summit Fieldhouse,422
+419,Futsal,4/13/25,Pine Hill Recreation Center,422
+420,Spikeball,3/29/25,Maplewood Sports Complex,422
