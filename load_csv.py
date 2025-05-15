@@ -1,6 +1,7 @@
 import sqlite3
 import csv
 
+#loads tables into intramural.db
 
 con = sqlite3.connect('intramural.db')
 cur = con.cursor()
