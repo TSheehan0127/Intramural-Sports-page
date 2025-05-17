@@ -46,8 +46,38 @@ def homepage():
 #used to add a new user to the database
 @app.route("/signup", methods=["GET","POST"])
 def signup():
-    #if request.method == "POST":
-        #pass
+    if request.method == "POST":
+        signed = request.form.get("sign")
+        if signed:
+
+            user_name = request.form.get("userN")
+
+            #username / pass validation
+            con = sqlite3.connect('intramural.db')
+            cur= con.cursor()
+
+            cur.execute('SELECT * FROM User WHERE username = ?',(user_name,))
+            valid = cur.fetchone()
+
+            if valid is not None:
+                #displays error message
+                error_message = "username already taken or is invalid"
+                return render_template('signup.html', error= error_message)
+            
+            #adds user to database
+            first_name= request.form.get("fname")
+            last_name= request.form.get("lname")
+            password = request.form.get("pass")
+            email = request.form.get("mail")
+            insert_record = "INSERT INTO User(first_name, last_name, password, username, email, role) VALUES (?, ?, ?, ?, ?, ?)"
+
+            cur.execute(insert_record, (first_name, last_name, password, user_name, email, 'U'))
+            con.commit()
+
+            #TODO add message on homepage.html, that notifies user they have been added
+            print("successfuly added user!")
+            return redirect(url_for("homepage"))
+        
     return render_template('signup.html')
 
 #will load the users info onto this page

@@ -10,7 +10,24 @@
 
     <body>
         <h1>sign up page</h1>
-        <p> there should be stuff here</p>
+        <!-- form to sign up-->
+        <form method="post" action="{{url_for('signup')}}">
+            <label for="fname"> First name:</label><br>
+            <input type="text" id="fname" name="fname" required><br>
+            <label for="lname">Last name: </label><br>
+            <input type="text" id="lname" name="lname" required><br>
+            <label for="userN">username: </label><br>
+            <input type="text" id="userN" name="userN" required><br> 
+            <label for="pass">password: </label><br>
+            <input type="password" id="pass" name="pass" required><br>
+            <label for="mail">email: </label><br>
+            <input type="text" id="mail" name="mail" required><br> 
+            <button type="submit" name="sign" value="sign">sign up</button>
+        </form>
+
+        {% if error %}
+        <p style="color:red;">{{error}}</p>
+        {% endif %}
     </body>
 
 </html>
