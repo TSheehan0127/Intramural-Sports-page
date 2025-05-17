@@ -10,8 +10,18 @@
 
     <body>
         <h1>Intramural sports application</h1>
-        <p>add more later</p>
+        <form method="post" action="{{url_for('homepage')}}">
+            <label for="user">username:</label>
+            <input type = "text" name = "username" required>
+            <label for ="pass">password: </label>
+            <input type="password" name="password" required>
+            <button type ="submit" name = "action" value="login">login</button>
+            <button type="submit" name = "action" value="signup">signup</button>
+        </form>
 
+        {% if error %}
+            <p style="color : red;">{{error}}</p>
+        {% endif %}
     </body>
 
 </html>
