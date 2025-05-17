@@ -35,7 +35,7 @@ def homepage():
             else:
                 #switches to index.html
                 print("login successful!")
-                return redirect(url_for("index"))
+                return redirect(url_for("index", username=user))
             
             #updates homepage.html with error message
             return render_template("homepage.html",error= error_message)
@@ -46,13 +46,14 @@ def homepage():
 #used to add a new user to the database
 @app.route("/signup", methods=["GET","POST"])
 def signup():
-    if request.method == "POST":
-        pass
+    #if request.method == "POST":
+        #pass
+    return render_template('signup.html')
 
 #will load the users info onto this page
-@app.route("/index", methods = ["GET","POST"])
-def index():
-    return render_template("index.html")
+@app.route("/index/<username>", methods = ["GET","POST"])
+def index(username):
+    return render_template("index.html",user = username)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)

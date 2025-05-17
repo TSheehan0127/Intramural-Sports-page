@@ -16,7 +16,11 @@
             <label for ="pass">password: </label>
             <input type="password" name="password" required>
             <button type ="submit" name = "action" value="login">login</button>
-            <button type="submit" name = "action" value="signup">signup</button>
+        </form>
+
+        <form method="post" action="{{ url_for('homepage') }}">
+            <input type="hidden" name="action" value="signup">
+            <button type="submit">Sign Up</button>
         </form>
 
         {% if error %}
