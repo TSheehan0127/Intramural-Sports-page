@@ -6,22 +6,34 @@
         <meta description = "website used to display a hub for people interesting in joing or creating sport events">
         <!--- add later: viewport handling for mobile devices-->
         <!-- add later: stylesheets for design-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+        
     </head>
 
     <body>
         <h1>Intramural sports application</h1>
-        <form method="post" action="{{url_for('homepage')}}">
-            <label for="user">username:</label>
-            <input type = "text" name = "username" required>
-            <label for ="pass">password: </label>
-            <input type="password" name="password" required>
-            <button type ="submit" name = "action" value="login">login</button>
-        </form>
+        <main>
+            <section class="signin">
+                <h2>Sign in</h2>
+                <hr>
+                <form method="post" action="{{url_for('homepage')}}" id="in">
+                    <div class="inputGroup">
+                        <label for="user">username:</label>
+                        <input type = "text" name = "username" id="user" required>
+                    </div>
+                    <div class="InputGroup">
+                        <label for ="pass">password: </label>
+                        <input type="password" name="password" id="pass" required>
+                    </div>
+                    <button type ="submit" name = "action" value="login">login</button>
+                </form>
+            </section>
 
-        <form method="post" action="{{ url_for('homepage') }}">
-            <input type="hidden" name="action" value="signup">
-            <button type="submit">Sign Up</button>
-        </form>
+            <form method="post" action="{{ url_for('homepage') }}" id="up">
+                <input type="hidden" name="action" value="signup">
+                <button type="submit">Sign Up</button>
+            </form>
+        </main>
 
         {% if error %}
             <p style="color : red;">{{error}}</p>

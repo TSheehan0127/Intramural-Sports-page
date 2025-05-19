@@ -73,6 +73,7 @@ def signup():
 
             cur.execute(insert_record, (first_name, last_name, password, user_name, email, 'U'))
             con.commit()
+            con.close()
 
             #TODO add message on homepage.html, that notifies user they have been added
             print("successfuly added user!")
@@ -83,7 +84,22 @@ def signup():
 #will load the users info onto this page
 @app.route("/index/<username>", methods = ["GET","POST"])
 def index(username):
-    return render_template("index.html",user = username)
+
+    #retrieves user data:
+    con = sqlite3.connect('intramural.db')
+    cur=con.cursor()
+    cur.execute('SELECT * FROM User WHERE username = ?',(username,))
+    user_data = cur.fetchone()
+    user_id = user_data[0]
+    first_name = user_data[1]
+    last_name = user_data[2]
+    password = user_data[3]
+    email = user_data[5]
+    role = user_data[6]
+
+
+
+    return render_template("index.html",name = first_name)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
