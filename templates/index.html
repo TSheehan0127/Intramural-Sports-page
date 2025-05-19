@@ -6,20 +6,46 @@
         <meta description = "website used to display a hub for people interesting in joing or creating sport events">
         <!--- add later: viewport handling for mobile devices-->
         <!-- add later: stylesheets for design-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     </head>
 
     <body>
-        <h1>index page</h1>
-        <h2>Welcome {{name}} !</h2>
+        <header>
+            <h1>Intramural Sports</h1>
+            <nav>
+                <a href="about.html">about</a>
+                <a href="events.html">events</a>
+            </nav>
 
-        <h3>Current Teams</h3>
-        <!-- add data about teams here-->
+        </header>
 
-        <nav>
-            <a href="about.html">about</a>
-            <a href="events.html">events</a>
+        <section>
+            <h2>Welcome {{name}} !</h2>
+        </section>
 
-        </nav>
+        <main>
+             <!-- add data about teams here-->
+            <table>
+                <caption>User status</caption>
+                <thead>
+                    <tr>
+                        <th>events</th>
+                        <th>teams</th>
+                        <th>date</th>
+                        <th>location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>test event</td>
+                        <td>test team</td>
+                        <td>test date</td>
+                        <td>test location</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
     </body>
 
 </html>

@@ -1,0 +1,83 @@
+* {
+    color: white;
+    font-family: sans-serif
+ }
+ 
+ header{
+    display: flex;
+    flex-direction: column;
+    
+ }
+ 
+ h1 {
+    color: #f1f1ff;
+    align-self: left;
+    margin: 1rem;
+ }
+
+h2 {
+   padding-left: 1em;
+   font-size: 3rem;
+}
+ nav{
+    background-color: #1a1a27;
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    height:3em;
+ }
+ 
+ a{
+    font-size: 1.1rem;
+    margin-left:2rem;
+    margin-right:2rem;
+    align-self:center;
+    
+ }
+ 
+ html {
+    background-color: #252526;
+    height:100vh;
+    max-height:100%;
+ }
+ 
+ body{
+    margin: 0px;
+    overflow-x: hidden;
+    display:flex;
+    flex-direction:column;
+    height:120%;
+    max-height:100vw;
+    
+ }
+
+section{
+   background-image: url("../static/images/soccerball.jpg");
+   background-size: cover;
+   height: 40em;
+}
+
+main{
+   box-shadow: 0 0 3em 3em #414240;
+   background-color:#414240;
+   flex-grow: 1;
+   display: flex;
+   flex-direct: column;
+   justify-content: center;
+   
+}
+
+table{
+   height:fit-content;
+   border-collapse: collapse;
+   
+}
+
+th, td {
+   border:.1em solid black;
+   padding:.5em
+}
+
+caption {
+   padding: .5em;
+}
