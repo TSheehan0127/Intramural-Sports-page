@@ -96,10 +96,31 @@ def index(username):
     password = user_data[3]
     email = user_data[5]
     role = user_data[6]
+    
+    # retrieves user information and displays it on index table
+    data = []
 
+    #selects event, team, date, and location for index page.
+    table_info = cur.execute('''SELECT 
+                             SportEvent.event_name, 
+                             Team.team_name, 
+                             SportEvent.date, 
+                             SportEvent.location, 
+                             UserToTeam.user_id 
+                             FROM SportEvent 
+                             JOIN Team ON Team.event_id = SportEvent.event_id 
+                             JOIN UserToTeam ON UserToTeam.team_id = Team.team_id 
+                             WHERE UserToTeam.user_id = ?
+                             ORDER BY date desc;''',(user_id,))
+    
+    table_stats = table_info.fetchall();
 
+    #loops through each row
+    for stats in table_stats:
+        new_dict = {"event": stats[0], "team": stats[1], "date": stats[2], "location": stats[3]}
+        data.append(new_dict)
 
-    return render_template("index.html",name = first_name)
+    return render_template("index.html",name = first_name, data = data)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
