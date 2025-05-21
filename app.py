@@ -149,7 +149,38 @@ def about(username):
     else:
         user['role'] = 'User'
     
+
+    if request.method == 'POST':
+
+        signed = request.form.get("sign")
+        if signed:
+            first_name = request.form.get('fname')
+            last_name = request.form.get('lname')
+            password = request.form.get('pass')
+            mail = request.form.get('mail')
+
+            if first_name:
+                cur.execute('UPDATE User SET first_name = ? WHERE username = ?',(first_name,username))
+                con.commit()
+            
+            if last_name:
+                cur.execute('UPDATE User SET last_name = ? WHERE username = ?',(last_name,username))
+                con.commit()
+            
+            if password:
+                cur.execute('UPDATE User SET password = ? WHERE username = ?',(password,username))
+                con.commit()
+
+            if mail:
+                cur.execute('UPDATE User SET mail = ? WHERE username = ?',(mail,username))
+                con.commit()
+
+            con.close()
+            return redirect(url_for('about', username=username))
+            
+
     return  render_template("about.html",username=username, user=user)
+
 
 
 if __name__ == "__main__":
