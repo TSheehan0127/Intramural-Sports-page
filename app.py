@@ -124,6 +124,8 @@ def index(username):
     
     table_stats = table_info.fetchall();
 
+    con.close()
+
     #loops through each row
     for stats in table_stats:
         new_dict = {"event": stats[0], "team": stats[1], "date": stats[2], "location": stats[3]}
@@ -134,7 +136,20 @@ def index(username):
 
 @app.route("/about/<username>", methods = ["GET","POST"])
 def about(username):
-    return  render_template("about.html",username=username)
+
+    con = sqlite3.connect('intramural.db')
+    cur = con.cursor()
+    cur.execute('SELECT * FROM User WHERE username = ?',(username,))
+    info = cur.fetchone()
+
+    user = {'name' : info[1]+' '+info[2],'username': info[4], 'password':info[3], 'email':info[5], 'role':info[6]}
+
+    if user['role'] == 'A':
+        user['role'] = 'Admin'
+    else:
+        user['role'] = 'User'
+    
+    return  render_template("about.html",username=username, user=user)
 
 
 if __name__ == "__main__":
