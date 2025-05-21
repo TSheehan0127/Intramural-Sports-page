@@ -33,6 +33,11 @@ def homepage():
                 print("login unsuccessful")
                 
             else:
+
+                print("Form keys received:", list(request.form.keys()))
+                print("username:", request.form.get("username"))
+                print("password:", request.form.get("password"))
+
                 #switches to index.html
                 print("login successful!")
                 return redirect(url_for("index", username=user))
@@ -90,6 +95,10 @@ def index(username):
     cur=con.cursor()
     cur.execute('SELECT * FROM User WHERE username = ?',(username,))
     user_data = cur.fetchone()
+
+    if user_data is None:
+        return "User not found", 404
+
     user_id = user_data[0]
     first_name = user_data[1]
     last_name = user_data[2]
@@ -120,7 +129,13 @@ def index(username):
         new_dict = {"event": stats[0], "team": stats[1], "date": stats[2], "location": stats[3]}
         data.append(new_dict)
 
-    return render_template("index.html",name = first_name, data = data)
+    return render_template("index.html",name = first_name, data = data, username = username)
+
+
+@app.route("/about/<username>", methods = ["GET","POST"])
+def about(username):
+    return  render_template("about.html",username=username)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)

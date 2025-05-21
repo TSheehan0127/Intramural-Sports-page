@@ -8,7 +8,44 @@
     <body>
         <h1>About page</h1>
         <nav>
-            <a href="index.html">index</a>
+            <a href="{{url_for('index', username=username)}}">index</a>
         </nav>
+
+        <!-- table of user information-->
+        <table>
+            <caption> Users info </caption>
+            <tr>
+                <th>name</th> <td>first_name+last_name</td>
+            </tr>
+            <tr>
+                <th>username</th> <td>username info</td>
+            </tr>
+            <tr>
+                <th>password</th> <td>password info</td>
+            </tr>
+            <tr>
+                <th>email</th> <td>users email</td>
+            </tr>
+            <tr>
+                <th>role</th> <td>users role</td>
+            </tr>
+        </table>
+
+        <!-- form that allows to change user stats ACCEPT their username-->
+        <section class="optional">
+            <h2>Change info</h2>
+            <p>select any to apply</p>
+            <form>
+            <label for="fname"> First name:</label><br>
+            <input type="text" id="fname" name="fname"><br>
+            <label for="lname">Last name: </label><br>
+            <input type="text" id="lname" name="lname"><br>
+            <label for="pass">password: </label><br>
+            <input type="password" id="pass" name="pass"><br>
+            <label for="mail">email: </label><br>
+            <input type="text" id="mail" name="mail"><br> 
+            <button type="submit" name="sign" value="sign">change</button>
+            </form>
+        </section>
     </body>
 </html>
