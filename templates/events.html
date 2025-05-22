@@ -12,23 +12,48 @@
         </nav>
 
         <table>
-            <caption>Active Events</caption>
-            <tr>
-                <th>Event</th>
-                <th>Team</th>
-                <th>Date</th>
-                <th>Location</th>
-            </tr>
+            <thead>
+
+                <caption>Active Events</caption>
+                <tr>
+                    <th>Event</th>
+                    <th>Team</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{row.event}}</td>
+                    <td>{{row.team}}</td>
+                    <td>{{row.date}}</td>
+                    <td>{{row.location}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
 
         <table>
-            <caption>Joinable events</caption>
-            <tr>
-                <th>Event ID</th>
-                <th>Event</th>
-                <th>Date</th>
-                <th>Location</th>
-            </tr>
+            <thead>
+                <caption>Joinable events</caption>
+                <tr>
+                    <th>Event ID</th>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in joinable %}
+                <tr>
+                    <td>{{joinable.event}}</td>
+                    <td>{{joinable.team}}</td>
+                    <td>{{joinable.date}}</td>
+                    <td>{{joinable.location}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
 
         <!--form to join event-->
@@ -39,11 +64,46 @@
                 <input type="number" id="eventIDE" name="eventIDE">
                 <button type="submit" name="enterJoin" value="enterJoin">enter</button>
             </form>
+            
+            <!--user has to pick a team to join event-->
+            {% if no_team %}
+            <h3>Join or Create Team</h3>
+            <table>
+                <thead>
+                    <caption>available teams</caption>
+                    <tr>
+                        <th>Team ID</th>
+                        <th>Team name</th>
+                        <th>size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                    <tr>
+                        <td>{{team.id}}</td>
+                        <td>{{team.name}}</td>
+                        <td>{{team.size}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-            <h3>join or create team</h3>
-            <!--TODO add html here-->
+            <!--join team in event-->
+            <h4>Join Team</h4>
+            <form method="POST" action="{{url_for('events', username=username)}}">
+                <label for="teamIDE">Enter Team ID:</label>
+                <input type="number" id="teamIDE" name="teamIDE">
+                <button type="submit" name="enterTeam_j" value="enterTeam_j">join</button>
+            </form>
 
-
+            <h4>Create Team</h4>
+            <form method="POST" action="{{url_for('events', username=username)}}">
+                <label for="tName">Team name</label>
+                <input type="text" id="tName" name="tName">
+                <button type="submit" name="enterTeam_c" value="enterTeam_c">create</button>
+                
+            </form>
+            {% endif %}
         </section>
 
         <!--form to leave event-->
@@ -52,7 +112,7 @@
             <form method="post" action="{{url_for('events',username=username)}}">
                 <label for="eventIDL">Enter Event ID:</label>
                 <input type="number" id="eventIDL" name="eventIDL">
-                <button type="submit" name="enterLeave" value="enterLeave">leave</button>
+                <button type="submit" name="leave" value="leave">leave</button>
             </form>
         </section>
     </body>

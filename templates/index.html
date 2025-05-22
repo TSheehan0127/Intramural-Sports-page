@@ -14,7 +14,7 @@
             <h1>Intramural Sports</h1>
             <nav>
                 <a href=" {{url_for('about', username=username)}}">about</a>
-                <a href="events.html">events</a>
+                <a href="{{url_for('events', username=username)}}">events</a>
             </nav>
 
         </header>
