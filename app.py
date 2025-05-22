@@ -137,10 +137,12 @@ def index(username):
 @app.route("/about/<username>", methods = ["GET","POST"])
 def about(username):
 
+    #retrieves user info
     con = sqlite3.connect('intramural.db')
     cur = con.cursor()
     cur.execute('SELECT * FROM User WHERE username = ?',(username,))
     info = cur.fetchone()
+
 
     user = {'name' : info[1]+' '+info[2],'username': info[4], 'password':info[3], 'email':info[5], 'role':info[6]}
 
@@ -150,6 +152,7 @@ def about(username):
         user['role'] = 'User'
     
 
+    #updates user info
     if request.method == 'POST':
 
         signed = request.form.get("sign")
@@ -180,6 +183,13 @@ def about(username):
             
 
     return  render_template("about.html",username=username, user=user)
+
+
+
+@app.route("/events/<username>",methods=["POST","GET"])
+def events(username):
+    return render_template("events.html",username=username)
+
 
 
 
