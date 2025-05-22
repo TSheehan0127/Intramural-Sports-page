@@ -10,5 +10,50 @@
         <nav>
             <a href="index.html">index</a>
         </nav>
+
+        <table>
+            <caption>Active Events</caption>
+            <tr>
+                <th>Event</th>
+                <th>Team</th>
+                <th>Date</th>
+                <th>Location</th>
+            </tr>
+        </table>
+
+        <table>
+            <caption>Joinable events</caption>
+            <tr>
+                <th>Event ID</th>
+                <th>Event</th>
+                <th>Date</th>
+                <th>Location</th>
+            </tr>
+        </table>
+
+        <!--form to join event-->
+        <section class="joinEvent">
+            <h2>Join event</h2>
+            <form method="post" action="{{url_for('events',username=username)}}">
+                <label for="eventIDE">Enter Event ID:</label>
+                <input type="number" id="eventIDE" name="eventIDE">
+                <button type="submit" name="enterJoin" value="enterJoin">enter</button>
+            </form>
+
+            <h3>join or create team</h3>
+            <!--TODO add html here-->
+
+
+        </section>
+
+        <!--form to leave event-->
+        <section class="leaveEvent">
+            <h2>Leave event</h2>
+            <form method="post" action="{{url_for('events',username=username)}}">
+                <label for="eventIDL">Enter Event ID:</label>
+                <input type="number" id="eventIDL" name="eventIDL">
+                <button type="submit" name="enterLeave" value="enterLeave">leave</button>
+            </form>
+        </section>
     </body>
 </html>
