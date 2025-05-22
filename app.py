@@ -188,9 +188,59 @@ def about(username):
 
 @app.route("/events/<username>",methods=["POST","GET"])
 def events(username):
-    return render_template("events.html",username=username)
+    #displays information for user
+
+    #display current events
+    current_events = []
+
+    con = sqlite3.connect('intramural.db')
+    cur = con.cursor()
+    cur.execute('SELECT * FROM User WHERE username = ?',(username,))
+    info = cur.fetchone()
+
+    user_id = info[0]
+
+    table_info = cur.execute('''SELECT 
+                             SportEvent.event_name, 
+                             Team.team_name, 
+                             SportEvent.date, 
+                             SportEvent.location, 
+                             UserToTeam.user_id 
+                             FROM SportEvent 
+                             JOIN Team ON Team.event_id = SportEvent.event_id 
+                             JOIN UserToTeam ON UserToTeam.team_id = Team.team_id 
+                             WHERE UserToTeam.user_id = ?
+                             ORDER BY date desc;''',(user_id,))
+    
+    table_stats = table_info.fetchall()
+
+    for stats in table_stats:
+        new_dict = {"event": stats[0], "team": stats[1], "date": stats[2], "location": stats[3]}
+        current_events.append(new_dict)
 
 
+    #display joinabale events
+    joinable_events = []
+    joinable_info = cur.execute('''SELECT 
+                                SE.event_id,
+                                SE.event_name, 
+                                SE.date, 
+                                SE.location
+                                FROM SportEvent SE
+                                WHERE NOT EXISTS (
+                                    SELECT 1
+                                    FROM Team T
+                                    JOIN UserToTeam UT ON UT.team_id = T.team_id
+                                    WHERE T.event_id = SE.event_id AND UT.user_id = ?
+                                )
+                                ORDER BY SE.date DESC;''',(user_id,))
+    
+    joinable_stats = joinable_info.fetchall()
+    for stats in joinable_stats:
+        new_dict = {"id": stats[0], "name": stats[1], "date": stats[2], "location": stats[3]}
+        joinable_events.append(new_dict)
+
+    return render_template("events.html", username=username, current_events = current_events, joinable_events = joinable_events)
 
 
 if __name__ == "__main__":

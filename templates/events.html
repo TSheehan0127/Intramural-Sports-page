@@ -8,7 +8,7 @@
     <body>
         <h1>Events page</h1>
         <nav>
-            <a href="index.html">index</a>
+            <a href="{{url_for('index', username=username)}}">index</a>
         </nav>
 
         <table>
@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in data %}
+                {% for row in current_events %}
                 <tr>
                     <td>{{row.event}}</td>
                     <td>{{row.team}}</td>
@@ -45,12 +45,12 @@
                 </tr>
             </thead>
             <tbody>
-                {% for event in joinable %}
+                {% for row in joinable_events %}
                 <tr>
-                    <td>{{joinable.event}}</td>
-                    <td>{{joinable.team}}</td>
-                    <td>{{joinable.date}}</td>
-                    <td>{{joinable.location}}</td>
+                    <td>{{row.id}}</td>
+                    <td>{{row.name}}</td>
+                    <td>{{row.date}}</td>
+                    <td>{{row.location}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
