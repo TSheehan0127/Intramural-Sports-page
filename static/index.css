@@ -62,7 +62,7 @@ main{
    background-color:#414240;
    flex-grow: 1;
    display: flex;
-   flex-direct: column;
+   flex-direction: column;
    justify-content: center;
    
 }
